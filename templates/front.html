@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Latest compiled JavaScript -->
+  <title>food pick</title>
+  <link rel="icon" type="image/jpeg" href="static/image/l1.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar */
+    .navbar-brand img {
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    /* Carousel */
+    #demo {
+      height: 500px;
+      overflow: hidden;
+    }
+    .carousel-item img {
+      object-fit: cover;
+      height: 500px;
+    }
+    /* Card */
+    .card {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    /* Buttons */
+    .btn-custom {
+      background-color: #343a40;
+      border-color: #343a40;
+    }
+    .btn-custom:hover {
+      background-color: #212529;
+      border-color: #212529;
+    }
+    /* Footer */
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+    }
+      .custom-bg{
+      background-color: rgba(160, 156, 157, 0.774);
+    }
+    </style>
+  <script>
+    function fun() {
+
+        window.location.href = "/add_cart";
+    }
+</script>
+
+</head>
+
+<body>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="static/image/l1.png" alt="Logo">
+        <b>Food Pick</b>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('add_res') }}"><i class="bi bi-building-fill-add"></i> Add Restaurant</a>
+          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-cart4"></i> Cart</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('add_cart') }}"><i class="bi bi-cart-plus"></i> Add Cart</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('cart_remove') }}"><i class="bi bi-cart-x"></i> Remove Cart</a></li>
+          </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-person-fill"></i> Log In
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ url_for('log') }}">Customer Sign In</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('admin') }}">Admin Sign In</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('logres') }}">Restaurant Sign In</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}"><i class="bi bi-person-add"></i> Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/image/a4.jpg" alt="Food 1" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Food Pick</h3>
+          <p>Pick Your Choice</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/image/a2.jpg" alt="food 2" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Food Pick</h3>
+          <p>pick your choice </p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/image/a3.jpg" alt="food 3" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Food Pick</h3>
+          <p>pick your choice </p>
+        </div>
+      </div>
+    </div>
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+    <div class="container">
+    <h1 class="text-center mt-5 mb-4"><b>Restaurants in Tirunelveli</b></h1>
+    <p class="text-center mb-5">Always at your service for fresh delivery to your door. Pick your favorite food in your favorite restaurant.</p>
+    <div class="row justify-content-center">
+    <div class="col">
+            <marquee scrollamount="5">
+                <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+                    <img class="card-img-top m-3 p-3" src="static/image/hotel/h1.jpg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+                    <div class="card-body" style="text-align: center;">
+                        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">A.R.Rahman Briyani</h4>
+                    </div>
+                </div>
+            </marquee>
+        </div>
+        <div class="col">
+            <marquee scrollamount="5">
+                <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+                    <img class="card-img-top m-3 p-3" src="static/image/hotel/h2.jpeg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+                    <div class="card-body" style="text-align: center;">
+                        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">Domino's</h4>
+                    </div>
+                </div>
+            </marquee>
+        </div>
+  <div class="col">
+            <marquee scrollamount="5">
+    <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+      <img class="card-img-top m-3 p-3" src="static/image/hotel/h3.jpg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);" >
+      <div class="card-body" style="text-align: center;">
+        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">New rusi hotel</h4>
+      </div>
+    </div>
+               </marquee>
+    </div>
+  <div class="col">
+            <marquee scrollamount="5">
+    <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+      <img class="card-img-top m-3 p-3" src="static/image/hotel/h4.jpg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);" >
+      <div class="card-body" style="text-align: center;">
+        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">Thalappakatti Briyani</h4>
+      </div>
+    </div>
+               </marquee>
+  </div>
+  <div class="col">
+            <marquee scrollamount="5">
+    <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+      <img class="card-img-top m-3 p-3 p-3" src="static/image/hotel/h5.jpeg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);" >
+      <div class="card-body" style="text-align: center;">
+        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">KFC</h4>
+      </div>
+    </div>
+    </marquee>
+    </div>
+  <div class="col">
+            <marquee scrollamount="5">
+    <div class="card m-1 p-1" style="width:330px; height:400px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+      <img class="card-img-top m-3 p-3" src="static/image/hotel/h6.jpg" alt="Card image" style="width:300px; height:250px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);" >
+      <div class="card-body" style="text-align: center;">
+        <h4 class="card-title m-2 p-3" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">Pizza hut</h4>
+      </div>
+    </div>
+  </marquee>
+  </div>
+  </div>
+  </div>
+
+<div class="container center-container m-4 p-4">
+  <div class="row justify-content-center align-items-center">
+    <div class="col m-3 p-3">
+
+      {% for res in rest %}
+           <div class="row m-3 p-3">
+             <a href="/add_cart1/{{ res[1] }}"  class="btn custom-bg btn-lg">{{ res[1]  }} </a>
+      </div>
+      {% endfor %}
+
+    </div>
+    </div>
+  </div>
+
+<footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="static/image/l1.png" alt="Logo" style="width:25px;" class="rounded-pill">
+          <b>Food Pick</b>
+          <hr>
+          <p>Tirunelveli</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Company</h5>
+          <hr>
+          <ul class="list-unstyled">
+            <li>About</li>
+            <li>Careers</li>
+            <li>Team</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <hr>
+          <ul class="list-unstyled">
+            <li>Help & Support</li>
+            <li>Partner with Us</li>
+            <li>Ride with Us</li>
+          </ul>
+          <h5>Legal</h5>
+          <hr>
+          <ul class="list-unstyled">
+            <li>Terms & Conditions</li>
+            <li>Cookie Policy</li>
+            <li>Privacy Policy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

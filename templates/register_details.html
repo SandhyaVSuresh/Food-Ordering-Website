@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration Details</title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 10px;
+    }
+    .table {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+    .table-title {
+      color: #fff;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-secondary">
+<div class="container-fluid">
+  <div class="table-responsive p-2 m-2">
+    <h3 class="table-title text-center bg-dark mb-4"><b>Registration Details</b></h3>
+    <table class="table table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th>Si no</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th>Phone no</th>
+          <th>Date of birth</th>
+          <th>Address</th>
+          <th>Username</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% for user in users %}
+          <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ user[3] }}</td>
+            <td>{{ user[4] }}</td>
+            <td>{{ user[5] }}</td>
+            <td>{{ user[6] }}</td>
+            <td>{{ user[7] }}</td>
+            <td>
+              <a href="/deletereg/{{ user[1] }}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger btn-sm"><i class="bi bi-x-circle-fill"></i></a>
+              <a href="/updatereg/{{user[1]}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modaledit{{user[1]}}"><i class="bi bi-pencil-square"></i></a>
+            </td>
+          </tr>
+        <div id="modaledit{{user[1]}}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" style="align-content: center;">Update User Register Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('updatereg', fname=user[1]) }}" method="POST">
+
+                        <input type="hidden" name="id" value="{{user[0]}}">
+                            <div class="form-group">
+                              <label>Register id</label>
+                              <input value="{{user[0]}}" type="text" name="sino" class="form-control" id="Input0" placeholder="Enter Full Name" readonly>
+                            </div>
+
+                        <input type="hidden" name="id" value="{{user[1]}}">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              <input value="{{user[1]}}" type="text" name="fname" class="form-control" id="Input1" placeholder="Enter Full Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input value="{{user[2]}}" type="text" name="lname" class="form-control" id="Input2" placeholder="Enter Email">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email-id</label>
+                                <input value="{{user[3]}}" name="emailid" type="text" class="form-control" id="Input3" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>Phone-no</label>
+                                <input value="{{user[4]}}" name="phno" type="text" class="form-control" id="Input4" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>Date of birth</label>
+                                <input value="{{user[5]}}" name="dob" type="date" class="form-control" id="Input6" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>address</label>
+                                <input value="{{user[6]}}" name="addr" type="text" class="form-control" id="Input7" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input value="{{user[7]}}" name="uname" type="text" class="form-control" id="Input8" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="row justify-content-center p-1">
+                                 <div class="col-md-6 text-center">
+                                   <button type="submit" class="btn btn-success mt-2" style="width:150px;">Update</button>
+                                 </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+    </div>
+          {% endfor  %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

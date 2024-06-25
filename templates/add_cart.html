@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>food pick</title>
+  <link rel="icon" type="image/jpeg" href="static/image/l1.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Order</title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <style>
+
+    .custom-bg {
+      background-color: rgba(12, 12, 12, 0.699);
+    }
+
+    .product-image {
+      width: 200px;
+      height: 200px;
+    }
+    .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+        .navbar-brand img {
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+  </style>
+</head>
+
+<body class="bg-secondary">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="static/image/l1.png" alt="Logo">
+                Food Pick
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link p-1" href="{{ url_for('front') }}"><i class="bi bi-house-heart-fill display-6"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  <div class="container">
+    <div class="table-responsive">
+      <h2 class="table-title text-white text-center m-3 p-3 mb-4 custom-bg">Your Food Order</h2>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Food id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="align-middle text-center">
+            <td><img src="static/image/food/{{ user[0] }}" alt="static/image/food/{{ user[0] }}" class="rounded" style="width:150px; height:150px" /></td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ user[3] }}</td>
+            <td><a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#myModal{{user[1]}}"> <i class="bi bi-cart-plus"></i></a></td>
+          </tr>
+
+    <div id="myModal{{user[1]}}" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+
+        <div class="modal-header bg-secondary">
+          <h5 class="modal-title text-white" style="align-content: center;">Cart</h5>
+           <button type="button" class="btn-close btn-dark" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ url_for('cart') }}" method="POST">
+
+
+            <div class="row mt-3">
+                <div class="col-4">
+              <label>Image</label>
+                    </div>
+                <div class="col-8">
+              <img class="form-control" name="image" src="static/image/food/{{ user[0] }}" style="width:150px; height:150px;">
+            </div>
+                </div>
+
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label>Username :</label>
+                </div>
+                <div class="col-8">
+                    <input value="{{ username }}" type="text" name="username" class="form-control" id="Input1" placeholder="Enter Userame">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-4">
+              <label>Food ID</label>
+                    </div>
+                <div class="col-8">
+              <input value="{{user[1]}}" type="text" name="fid" class="form-control" id="Input2" placeholder="Enter food id">
+            </div>
+                </div>
+
+            <div class="row mt-3">
+                <div class="col-4">
+              <label>Food name</label>
+                    </div>
+                <div class="col-8">
+              <input value="{{user[2]}}" name="fname" type="text" class="form-control" id="Input3" placeholder="Enter food name">
+            </div>
+                </div>
+
+            <div class="row mt-3">
+                <div class="col-4">
+              <label>Price</label>
+                    </div>
+                <div class="col-8">
+              <input value="{{user[3]}}" name="rate" type="text" class="form-control" id="Input5" placeholder="Price">
+            </div>
+                </div>
+
+            <div class="row mt-3">
+                <div class="col-4">
+              <label>Quantity</label>
+                    </div>
+                <div class="col-8">
+              <input value="{{ quantity }}" name="quantity" type="number" class="form-control" id="Input6" placeholder="Enter Quantity">
+            </div>
+            </div>
+
+            <div class="row justify-content-center p-1">
+              <div class="col-md-6 text-center">
+                <button type="submit" class="btn btn-success mt-2" style="width:150px;">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="text-center">
+          <a class="btn btn-success" href="{{ url_for('cart_remove') }}"><i class="bi bi-cart3"></i> cart</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

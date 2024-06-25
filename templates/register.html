@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>food pick</title>
+    <link rel="icon" type="image/jpeg" href="static/image/l1.png">
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-image: url("https://crossbones.org.uk/wp-content/uploads/2016/08/grey-background.jpg");
+      background-size: cover;
+    }
+  </style>
+  <script>
+    function fun(){
+            window.location.href = "/register";
+    }
+</script>
+</head>
+<body>
+  <form method="post">
+    <div class="container mt-1 mb-1">
+      <div class="row text-muted rounded">
+        <div class="col bg-secondary rounded mt-4 p-3">
+            
+            <h5><p class="p-2 m-2 text-white"><i class="bi-people-fill"></i> Create your username and password</p></h5>
+            <div class="input-group mb-1 input-group">
+            <div class="form-floating p-1 m-1">
+              <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="fname" required>
+              <label for="fname"><i class="bi-person-fill"></i> First Name</label>
+            </div>
+            <div class="form-floating  p-1 m-1">
+              <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname">
+              <label for="lname"><i class="bi-person-fill"></i> Last Name</label>
+            </div>
+            </div>
+            <div class="form-floating  p-1 m-1">
+              <input type="email" class="form-control" id="emailid" placeholder="Enter Email" name="emailid" required>
+              <label for="emailid"><i class="bi-envelope-fill"></i> Email</label>
+            </div>
+            <div class="input-group mb-1 input-group-sm">
+              <div class="form-floating  p-1 m-1">
+                <input type="text" class="form-control" id="Phno" placeholder="Enter Phone no" name="phno" required>
+                <label for="Phno"><i class="bi-phone-fill"></i> Phone no</label>
+            </div>
+              <div class="form-floating  p-1 m-1">
+                <input type="date" class="form-control" id="dob" placeholder="Dob" name="dob" required>
+                <label for="dob"><i class="bi-calculator-fill"></i> Date of birth</label>
+            </div>
+        </div>
+            <div class="form-floating  p-1 m-1">
+              <input type="text" class="form-control" id="addr" placeholder="Enter address" name="addr" required>
+              <label for="addr"><i class="bi-house-fill"></i> Address</label>
+            </div>
+            <div class="form-floating  p-1 m-1">
+                <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                <label for="uname"><i class="bi-person-fill"></i> Username</label>
+              </div>
+              <div class="input-group mb-1 input-group-sm">
+              <div class="form-floating  p-1 m-1">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
+                <label for="pwd"><i class="bi-lock-fill"></i> Password</label>
+              </div>
+              <div class="form-floating  p-1 m-1">
+                <input type="password" class="form-control" id="cpwd" placeholder="Enter password" name="cpwd" required>
+                <label for="cpwd"><i class="bi-lock-fill"></i> Conform password</label>
+              </div>
+              </div>
+              <div class="d-grid text-center  p-1 m-1">
+                <button type="submit" formaction="{{ url_for('register') }}" class="btn btn-dark mt-2"><i class="bi-person-plus-fill"></i> Sign Up</button>
+                <p class="text-white">By Clicking Sign up you agree to all the<a href="register.html" class="btn btn-link">Terms and conditions</a></p>
+              </div>
+        </div>
+        <div class="col mt-4" style="padding: 0; overflow: hidden;">
+            <img class="img-fluid rounded" src="https://www.peerspace.com/resources/wp-content/uploads/best-cleveland-food-photographers.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

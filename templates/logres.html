@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{
+      background-image: url("https://st3.depositphotos.com/7893620/15631/i/450/depositphotos_156319634-stock-photo-spices-herbs-olive-oil-and.jpg");
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <form method="post">
+    <div class="container mt-1 p-1">
+      <div class="row justify-content-center">
+          <div class="col-3 col-6 col-3 bg-white rounded mt-4 p-2">
+            <p><h3 class="p-2 m-3">Welcome to <i>Food pick</i></h3></p>
+            <p class="p-2 m-3">Sign in with your restaurant username and password</p>
+            <div class="form-floating p-2 mt-5 m-3">
+              <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname">
+              <label for="uname"><i class="bi bi-buildings"></i> Restaurant username</label>
+            </div>
+            <div class="form-floating p-2 m-3">
+              <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+              <label for="pwd"><i class="bi-lock-fill"></i> Password</label>
+            </div>
+            <a href="#" class="btn btn-link p-2 m-3">Forgot password?</a>
+            <div class="d-grid text-center text-light p-2 m-3">
+              <button type="submit" formaction="{{ url_for('logres') }}" class="btn btn-dark"><b><i class="bi-arrow-bar-right"></i> Sign In</b></button>
+            </div>
+            <p class="p-2 m-3">Don't have an account?<a href="add_res.html" class="btn btn-link">Sign up</a></p>
+          </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

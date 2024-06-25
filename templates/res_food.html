@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>food pick</title>
+    <link rel="icon" type="image/jpeg" href="static/image/l1.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration Details</title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <style>
+    .container {
+      overflow: hidden;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+    .table {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+    .table-title {
+      color: #fff;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-secondary">
+<div class="container-fluid">
+  <div class="table-responsive">
+    <h3 class="table-title text-center text-center bg-dark  mb-4"><b>Food Details</b></h3>
+    <table class="table table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">food name</th>
+          <th scope="col">food id</th>
+          <th scope="col">category</th>
+          <th scope="col">discription</th>
+          <th scope="col">rate</th>
+          <th scope="col">restaurant name</th>
+          <th scope="col">food type</th>
+          <th scope="col">available</th>
+          <th scope="col">food image</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+    {% for row in users %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td><img src="static/image/food/{{row[8]}}" alt="static/image/food/{{row[8]}}" class="rounded" style="width:100px; height:100px"/>
+        <td><a href="/delete/{{ row[1] }}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger btn-sm"><i class="bi bi-x-circle-fill"></i></a>
+           <a href="/update/{{row[1]}}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modaledit{{row[1]}}"><i class="bi bi-pencil-square"></i></a></td>
+      </tr>
+        <!-- Enter edit Modal -->
+    <div id="modaledit{{row[1]}}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" style="align-content: center;">Update food Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('update', fid=row[1]) }}" method="POST">
+
+                        <input type="hidden" name="id" value="{{row[1]}}">
+                            <div class="form-group">
+                              <label>Food Name</label>
+                              <input value="{{row[0]}}" type="text" name="fname" class="form-control" id="Input1" placeholder="Enter Food Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>food id</label>
+                                <input value="{{row[1]}}" type="text" name="fid" class="form-control" id="Input2" placeholder="Enter Food id">
+                            </div>
+
+                            <div class="form-group">
+                                <label>category</label>
+                                <input value="{{row[2]}}" name="cate" type="text" class="form-control" id="Input3" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input value="{{row[3]}}" name="discription" type="text" class="form-control" id="Input4" placeholder="Enter Description">
+                              </div>
+
+                            <div class="form-group">
+                                <label>Rate</label>
+                                <input value="{{row[4]}}" name="rate" type="text" class="form-control" id="Input5" placeholder="Enter Rate">
+                              </div>
+
+                            <div class="form-group">
+                                <label>restaurant name</label>
+                                <input value="{{row[5]}}" name="restaurantname" type="text" class="form-control" id="Input6" placeholder="Enter restaurant name">
+                              </div>
+
+                            <div class="form-group">
+                                <label>food type</label>
+                                <input value="{{row[6]}}" name="foodtype" type="text" class="form-control" id="Input7" placeholder="Enter food type">
+                              </div>
+
+                            <div class="form-group">
+                                <label>available</label>
+                                <input value="{{row[7]}}" name="ava" type="text" class="form-control" id="Input8" placeholder="Enter Phone Number">
+                              </div>
+
+                            <div class="form-group">
+                                <label>image</label>
+                                <input value="{{row[8]}}" name="img1" type="text" class="form-control" id="Input9" placeholder="Enter Phone Number">
+                              </div>
+
+                      <div class="row justify-content-center p-1">
+                                 <div class="col-md-6 text-center">
+                                   <button type="submit" class="btn btn-success mt-2" style="width:150px;">Update</button>
+                                 </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <!-- End of Edit Modal -->
+    {% endfor  %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
